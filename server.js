@@ -56,12 +56,9 @@ app.get('/api/todos', function index(req, res) {
 });
 
 app.post('/api/todos', function create(req, res) {
-  todos.push(req.body, function(err, todos){
-    if(err) return console.log(err);
-    return res.send(todos);
-
+  todos.push(req.body);
+  res.json(req.body);
   });
-});
 
 app.get('/api/todos/:id', function show(req, res) {
   /* This endpoint will return a single todo with the
