@@ -57,13 +57,20 @@ app.get('/api/todos', function index(req, res) {
 
 app.post('/api/todos', function create(req, res) {
   todos.push(req.body);
+  var id = todos.length;
+  req.body._id = id;
   res.json(req.body);
   });
 
 app.get('/api/todos/:id', function show(req, res) {
-  /* This endpoint will return a single todo with the
-   * id specified in the route parameter (:id)
-   */
+  
+  var todoId = parseInt(req.params.id);
+  var findTodo = todos.filter(function (todo){
+    return todo._id == todoId;
+  })[0];
+
+  res.json(findTodo);
+
 });
 
 app.put('/api/todos/:id', function update(req, res) {
